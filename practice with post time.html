@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document practice</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+</head>
+<style>
+    .container {
+        width: 80%;
+        display: flex;
+        gap: 50px;
+        margin: 50px;
+    }
+</style>
+
+<body>
+
+    <div class="container">
+
+        <div class="left">
+            <form id="form">
+
+                <label for="">Write Something</label><br>
+                <textarea name="" id="input" cols="30" rows="10" placeholder="write something...."></textarea><br>
+                <button type="submit">Post</button>
+
+            </form>
+        </div>
+
+        <div class="right">
+            <h3>Post Here</h3>
+            <div id="posts">
+
+            </div>
+        </div>
+
+    </div>
+
+    <p id="currentTime"></p>
+
+    <script>
+
+        // var timerInterval;
+
+        var timerInterval = setTimeout(displayCurrentTime, .1000);
+
+        function displayCurrentTime() {
+            var currentTime = new Date();
+            var timeElement = document.getElementById("currentTime");
+            timeElement.innerHTML = currentTime.toLocaleTimeString();
+        }
+
+
+
+        let form = document.getElementById("form");
+        let input = document.getElementById("input");
+        let posts = document.getElementById("posts")
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault()
+
+            readValue()
+            //console.log("kk");
+        })
+        let data = {}
+        function readValue() {
+
+            data['text'] = input.value
+            readPost()
+        }
+
+        function readPost() {
+
+            posts.innerHTML += `<div>
+                
+                <p>${data.text} </p>
+                <span>
+                    
+                <i onclick="editCont(this)" class="bi bi-pencil-square"> Edit your contant</i> 
+                <i onclick="deleteCont(this)" class="bi bi-trash3">  Remove your content</i>
+           
+                </span>
+                </div>`
+
+            input.value = " "
+        }
+        function editCont(e) {
+            input.value = e.parentElement.previousElementSibling.innerHTML;
+            e.parentElement.parentElement.remove();
+        }
+
+
+
+    </script>
+
+
+
+</body>
+
+</html>
